@@ -1,5 +1,40 @@
+.wrapper {
+    display: flex;
+}
+
 .container {
     margin-left: 52px;
+}
+
+.content {
+    width: 600px;
+    height: 400px;
+    margin-left: 10px;
+    margin-top: -10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border: 1px solid rgb(235, 238, 240);;
+}
+
+.header h1 {
+    padding: 10px;
+    font-family: 'arial';
+    font-size: 20px;
+}
+
+.header button {
+    height: 35px;
+    width: 35px;
+    background: transparent;
+    border: transparent;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .logo {
@@ -8,11 +43,30 @@
     margin-bottom: 15px;
 }
 
+.navbar {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .nav-item {
+    display: flex;
+    flex-direction: row;
     height: 30px;
     width: 30px;
     margin-bottom: 10px;
+    border-radius: 50%;
+    padding: 5px 5px;
+}
+
+.nav-item:hover {
+    background: rgba(218, 114, 29, 0.1);
+}
+
+.nav-item:hover svg {
+    fill: rgb(29, 161, 242);
 }
 
 .tweet-btn {
@@ -31,3 +85,162 @@
     margin-left: 30px;
     margin-top: 40px;
 }
+
+.post-box {
+    border: 1px solid rgb(235, 238, 240);
+}
+
+.post-box-tweet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.post-box-image {
+    display: flex;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.post-box-image img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.post-box-image input {
+    height: 50px;
+    width: 100%;
+    border: transparent;
+    margin-left: 20px;
+    padding: 0px 0px 20px 0px;
+}
+
+.inp-btns {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+}
+
+.inp-btns button{
+    height: 40px;
+    width: 40px;
+    background: transparent;
+    border: transparent;
+}
+
+.inp-btns button:hover { 
+    border-radius: 50%;
+    background: rgba(218, 114, 29, 0.1);
+}
+
+.tweet-post-btn {
+    border-radius: 20px;
+    height: 40px;
+    width: 80px;
+    margin-right: 5px;
+    background:rgb(29, 161, 242);
+    border: transparent;
+    color:rgb(235, 238, 240);
+    font-weight: 700;
+}
+
+.tweet-post-text {
+    box-sizing: border-box;
+    padding: 10px 0px 30px 20px;
+    outline: none;
+    border: none;
+    resize: none;
+    width: 100%;
+    height: 80px;
+    overflow: -moz-hidden-unscrollable;
+    font-size: 19px;
+    font-weight: 450;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tweet-post-text:focus {
+    border-bottom: 1px solid rgb(235, 238, 240);
+}
+
+.tweet-post-text::-webkit-scrollbar {
+    width: 10px;
+    background: rgb(29, 161, 242);;
+    border-radius: 5px;
+}
+
+.tweet-post-text::placeholder {
+    color: #5c748b;
+}
+
+.tweets {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgb(235, 238, 240);
+}
+
+.tweets:hover {
+    background: rgb(235, 238, 240);
+}
+
+.tweet-profile-image {
+    height: 100%;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.tweet-profile-image img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.tweet {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.tweet-user-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tweet-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tweet-image {
+    margin-top: 10px;
+}
+
+.tweet-image img {
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.tweet-three-dots-menu button{
+    height: 20px;
+    width: 40px;
+    border-radius: 10px;
+    background: transparent;
+    border: transparent;
+    padding: 5px;
+}
+
+.tweet-three-dots-menu button:hover {
+    background: rgb(235, 238, 240);
+}
+ 

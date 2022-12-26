@@ -1,6 +1,6 @@
 window.onload = async () => {
 
-    const result = await fetch(`http://localhost:3000/tweet/recent`);
+    const result = await fetch(`https://twitter-backend-6yot.onrender.com/tweet/recent`);
 
     const tweets = await result.json();
 
@@ -9,7 +9,7 @@ window.onload = async () => {
     document.getElementById('tweet-body').insertAdjacentHTML('beforeend', tweets.data.map((tweet) => {
         const date = new Date(tweet.creationDatetime);
         
-        return `<div class="tweets">
+        return `<div id=${tweet._id} class="tweets">
             <div class="tweet-profile-image">
             <img
                 src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80"
@@ -24,6 +24,12 @@ window.onload = async () => {
                 <p>${date.toDateString()}</p>
                 </div>
                 <div class="tweet-three-dots-menu">
+                <button data-id=${tweet._id} class="tweet-edit" id="tweet-edit">
+                    Edit
+                </button>
+                <button data-id=${tweet._id} class="tweet-delete" id="tweet-delete">
+                    Delete
+                </button>
                 <button>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -53,7 +59,7 @@ document.addEventListener('click', async (event) => {
             userId: "12345"
         }
         
-        const tweetResponse = await fetch('http://localhost:3000/tweet/create', {
+        const tweetResponse = await fetch('https://twitter-backend-6yot.onrender.com/tweet/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +77,41 @@ document.addEventListener('click', async (event) => {
         document.querySelector('.tweet-post-text').value = "";
         alert(tweet.message);
     }
-})
+
+    if(event.target.classList.contains('tweet-delete')) {
+
+        if(confirm("Are you sure you want to delete this tweet?")) {
+            const tweetId = event.target.getAttribute('data-id');
+
+            const data = {
+                tweetId,
+                userId: "12345"
+            };
+
+            const response = await fetch('https://twitter-backend-6yot.onrender.com/tweet/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await response.json();
+
+            if(result.status !== 200) {
+                alert(result.message);
+                return;
+            }
+            
+            alert("Tweet deleted successfuly");
+            document.getElementById(tweetId).remove();
+        }
+    }
+
+    if(event.target.classList.contains('tweet-edit')) {
+
+    }
+}) 
 
 // Callback 
 // Promises 

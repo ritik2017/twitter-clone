@@ -167,7 +167,7 @@
 
 .tweet-post-text::-webkit-scrollbar {
     width: 10px;
-    background: rgb(29, 161, 242);;
+    background: rgb(29, 161, 242);
     border-radius: 5px;
 }
 
@@ -244,3 +244,16 @@
     background: rgb(235, 238, 240);
 }
  
+#tweet-edit {
+    height: 20px;
+    width: 50px;
+    background: rgb(29, 161, 242);
+    border-radius: 12px;
+}
+
+#tweet-delete {
+    height: 20px;
+    width: 50px;
+    background: rgb(29, 161, 242);
+    border-radius: 12px;
+}

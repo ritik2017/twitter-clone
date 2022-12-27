@@ -1,10 +1,14 @@
+let tweetOffset = 0;
+
 window.onload = async () => {
 
-    const result = await fetch(`https://twitter-backend-6yot.onrender.com/tweet/recent`);
+    const result = await fetch(`https://twitter-backend-6yot.onrender.com/tweet/recent?offset=${tweetOffset}`); // Paginated API 
 
     const tweets = await result.json();
 
     console.log(tweets.data);
+
+    tweetOffset = tweetOffset + tweets.data.length;
 
     document.getElementById('tweet-body').insertAdjacentHTML('beforeend', tweets.data.map((tweet) => {
         const date = new Date(tweet.creationDatetime);
@@ -41,7 +45,7 @@ window.onload = async () => {
                 </div>
             </div>
             <div class="tweet-body">
-                <span>${tweet.title}
+                <span id='span-${tweet._id}'>${tweet.title}
                 </span>
             </div>
             </div>
@@ -109,7 +113,36 @@ document.addEventListener('click', async (event) => {
     }
 
     if(event.target.classList.contains('tweet-edit')) {
+        const tweetId = event.target.getAttribute('data-id');
 
+        const span = document.getElementById('span-' + tweetId);
+
+        const tweetText = prompt("Enter new tweet text", span.innerText);
+
+        const data = {
+            tweetId,
+            title: tweetText,
+            text: "Random value",
+            userId: "12345"
+        }
+
+        const response = await fetch('https://twitter-backend-6yot.onrender.com/tweet/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+
+        const result = await response.json();
+
+        if(result.status !== 200) {
+            alert(result.message);
+            return;
+        }
+
+        alert("Updated Successfully");
+        span.innerText = tweetText;
     }
 }) 
 

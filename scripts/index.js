@@ -1,7 +1,11 @@
 let tweetOffset = 0;
+let runningCriticalFunction = false;
 
-window.onload = async () => {
-
+async function getTweetsAndInsertHTML() {
+    if(runningCriticalFunction) {
+        return;
+    }
+    runningCriticalFunction = true;
     const result = await fetch(`https://twitter-backend-6yot.onrender.com/tweet/recent?offset=${tweetOffset}`); // Paginated API 
 
     const tweets = await result.json();
@@ -51,6 +55,11 @@ window.onload = async () => {
             </div>
         </div>`
     }).join(""))
+    runningCriticalFunction = false;
+}
+
+window.onload = async () => {
+    getTweetsAndInsertHTML();
 }
 
 document.addEventListener('click', async (event) => {
@@ -144,7 +153,25 @@ document.addEventListener('click', async (event) => {
         alert("Updated Successfully");
         span.innerText = tweetText;
     }
+
+    // if(event.target.classList.contains('show_more')) {
+    //     getTweetsAndInsertHTML();
+    // }
 }) 
+
+window.addEventListener('scroll', () => {
+    const {
+        scrollTop,
+        scrollHeight,
+        clientHeight
+    } = document.documentElement;
+
+    // console.log(scrollTop, scrollHeight, clientHeight);
+
+    if((scrollTop + clientHeight) >= (scrollHeight - 20)) {
+        getTweetsAndInsertHTML();
+    }
+})
 
 // Callback 
 // Promises 
